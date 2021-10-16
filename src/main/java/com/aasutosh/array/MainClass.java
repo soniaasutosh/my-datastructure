@@ -22,77 +22,42 @@ public class MainClass {
 			int index = 0;
 			while ((line = br.readLine()) != null) {
 				String[] valueArr = line.split(",");
-				// System.out.println(Arrays.toString(valueArr));
-//				System.out.print(valueArr[5]);
-//				System.out.print("\t");
-//				System.out.print(valueArr[8]);
-//				System.out.print("\t");
-//				System.out.println(valueArr[14]);
 
 				Integer empId = Integer.parseInt(valueArr[0]);
 				String empName = valueArr[1] + " " + valueArr[2] + " " + valueArr[3] + " " + valueArr[4];
 				Long salary = Long.parseLong(valueArr[25]);
 				String gender = valueArr[5];
 				String empMotherName = valueArr[8];
-				LocalDate dateOfJoin = getDate(valueArr[14]);
+				LocalDate dateOfJoin = Utility.getDate(valueArr[14]);
 
-				emp[index++] = new Employee(empId, empName, salary);
+				emp[index++] = new Employee(empId, empName, salary, gender, empMotherName, dateOfJoin);
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		Employee[] top10SalaryEmps = getTop10SalaryEmps(emp);
-
 		System.out.println("Total Employees:  " + emp.length);
-		System.out.println("Top Ten Employees:  " + top10SalaryEmps.length);
-		printEmployee(10, top10SalaryEmps);
+
+		Employee[] top10SalaryEmps = getTop10SalaryEmps(emp);
+		System.out.println("Top Ten Salary wise Employees:  " + top10SalaryEmps.length);
+		Utility.print(10, top10SalaryEmps);
+
+		Employee[] top10LatestJoinedEmps = getTop10LatestJoinedEmps(emp);
+		System.out.println("Top Ten Latest joined Employees:  " + top10LatestJoinedEmps.length);
+		Utility.print(10, top10LatestJoinedEmps);
 	}
 
-	private static LocalDate getDate(String value) {
-		if (value == null || value.trim().isEmpty()) {
-			return null;
-		}
-		try {
-			if (value.contains("-")) {
-				return LocalDate.parse(getFixedDateString(value,"-"), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-			} 
-				
-			return LocalDate.parse(getFixedDateString(value,"/"), DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+	
+	private static Employee[] getTop10LatestJoinedEmps(Employee[] emp) {
 
-		} catch (Exception e) {
-			System.err.println(value + " :: " + e.getMessage());
-			throw e;
-		}
-		
+		return null;
 	}
 
-	private static String getFixedDateString(String value, String delimiter) {
-		String[] tokens = value.split(delimiter);
-		
-		Integer values[]=new Integer[3];
-		
-		for (int i = 0; i < values.length; i++) {
-			values[i] = Integer.parseInt(tokens[i]);
-			
-		}
-		
-		return String.format("%02d"+delimiter+"%02d"+delimiter+"%02d", values[0],values[1],values[2]);
-	}
-
-	private static void printEmployee(int n, Employee[] emp) {
-		System.out.println("******************************************");
-		for (int i = 0; i < n; i++) {
-			Employee employee = emp[i];
-			System.out.println(employee);
-		}
-	}
-
+	
+	
 	private static Employee[] getTop10SalaryEmps(Employee[] emp) {
-//		printEmployee(5, emp);
-		sortRecords(emp);
-//		printEmployee(5, emp);
+		sortRecordsBySalary(emp);
 		Employee[] newEmpArr = new Employee[10];
 		for (int i = 0; i < 10; i++) {
 			newEmpArr[i] = emp[i];
@@ -101,7 +66,7 @@ public class MainClass {
 		return newEmpArr;
 	}
 
-	private static void sortRecords(Employee[] emp) {
+	private static void sortRecordsBySalary(Employee[] emp) {
 		for (int i = 0; i < emp.length; ++i) {
 			for (int j = i + 1; j < emp.length; ++j) {
 				// if (emp[i].getSalary() < emp[j].getSalary()) { Ascending
