@@ -3,7 +3,6 @@ package com.aasutosh.array;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import com.aasutosh.model.Employee;
 
@@ -39,31 +38,51 @@ public class MainClass {
 
 		System.out.println("Total Employees:  " + emp.length);
 
-		Employee[] top10SalaryEmps = getTop10SalaryEmps(emp);
-		System.out.println("Top Ten Salary wise Employees:  " + top10SalaryEmps.length);
-		Utility.print(10, top10SalaryEmps);
-
-		Employee[] top10LatestJoinedEmps = getTop10LatestJoinedEmps(emp);
-		System.out.println("Top Ten Latest joined Employees:  " + top10LatestJoinedEmps.length);
-		Utility.print(10, top10LatestJoinedEmps);
-	}
-
-	
-	private static Employee[] getTop10LatestJoinedEmps(Employee[] emp) {
-
-		return null;
-	}
-
-	
-	
-	private static Employee[] getTop10SalaryEmps(Employee[] emp) {
+		System.out.println();
+		System.out.println();
+		System.out.println("Top Ten Salary wise Employees  ");
 		sortRecordsBySalary(emp);
-		Employee[] newEmpArr = new Employee[10];
-		for (int i = 0; i < 10; i++) {
-			newEmpArr[i] = emp[i];
+		Utility.print(10, emp);
+
+		System.out.println();
+		System.out.println();
+		System.out.println("Top Ten Latest joined Employees  ");
+		sortRecordByDateOfJoiningLatest(emp);
+		Utility.print(10, emp);
+
+		System.out.println();
+		System.out.println();
+		System.out.println("Top Ten old joined Employees  ");
+		sortRecordByDateOfJoiningOld(emp);
+		Utility.print(10, emp);
+	}
+
+	private static void sortRecordByDateOfJoiningOld(Employee[] emp) {
+		for (int i = 0; i < emp.length; ++i) {
+			for (int j = i + 1; j < emp.length; ++j) {
+
+				if (emp[i].getDateOfJoin().isAfter(emp[j].getDateOfJoin())) { // Ascending
+					Employee temp = emp[i];
+					emp[i] = emp[j];
+					emp[j] = temp;
+				}
+			}
 
 		}
-		return newEmpArr;
+	}
+
+	private static void sortRecordByDateOfJoiningLatest(Employee[] emp) {
+		for (int i = 0; i < emp.length; ++i) {
+			for (int j = i + 1; j < emp.length; ++j) {
+
+				if (emp[i].getDateOfJoin().isBefore(emp[j].getDateOfJoin())) { // Descending
+					Employee temp = emp[i];
+					emp[i] = emp[j];
+					emp[j] = temp;
+				}
+			}
+
+		}
 	}
 
 	private static void sortRecordsBySalary(Employee[] emp) {
