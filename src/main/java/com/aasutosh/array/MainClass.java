@@ -10,7 +10,7 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\100 Records.csv";
-
+		
 		Employee[] emp = new Employee[100];
 
 		int bufferSize = 10240; // 10k
