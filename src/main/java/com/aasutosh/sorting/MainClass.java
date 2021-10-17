@@ -52,7 +52,8 @@ public class MainClass {
 
 		startTime = System.currentTimeMillis();
 //		bubbleShort(emp);
-		selectionShort(emp);
+//		selectionShort(emp);
+		insertionShort(emp);
 		System.out.println("Sorted in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
 
 		Utility.print(10, emp);
@@ -80,6 +81,19 @@ public class MainClass {
 				}
 			}
 			swap(emp, i, minIndex);
+		}
+
+	}
+	
+	private static void insertionShort(Employee[] emp) {
+		for (int i = 1; i < emp.length - 1; ++i) {
+			Employee key=emp[i];
+			int j = i - 1;
+			while (j>=0 && emp[j].getSalary() <  key.getSalary()) {
+				emp[j + 1]= emp[j];
+				j--;
+			}
+			emp[j + 1]= key;
 		}
 
 	}
