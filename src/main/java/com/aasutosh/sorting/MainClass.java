@@ -7,17 +7,21 @@ import java.time.LocalDate;
 import com.aasutosh.model.Employee;
 
 public class MainClass {
+	
 
 	public static void main(String[] args) {
 		// String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\100 Records.csv";
 
 		long startTime = System.currentTimeMillis();
 
-		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\50000 Records.csv";
+		//String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\50000 Records.csv";
 
+		//String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\Hr1m.csv";
+		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\Hr5m.csv";
+		
 		// Employee[] emp = new Employee[100];
-		Employee[] emp = new Employee[50000];
-
+//		Employee[] emp = new Employee[50000];
+		Employee[] emp = new Employee[5000000];
 		int bufferSize = 10240; // 10k
 
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName), bufferSize)) {
@@ -51,10 +55,14 @@ public class MainClass {
 		System.out.println("Top Ten Salary wise Employees  ");
 
 		startTime = System.currentTimeMillis();
+		
 //		bubbleShort(emp);
 //		selectionShort(emp);
-		insertionShort(emp);
-		System.out.println("Sorted in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
+//		insertionShort(emp);
+		
+		QuickShort.sort(emp, 0, emp.length -1);
+		
+		System.out.println("Sorted in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds with itration counter :: "+Utility.counter);
 
 		Utility.print(10, emp);
 
@@ -63,48 +71,44 @@ public class MainClass {
 	private static void bubbleShort(Employee[] emp) {
 		for (int i = 0; i < emp.length - 1; ++i) {
 			for (int j = i + 1; j < emp.length - i - 1; ++j) {
+				Utility.counter++;
 				if (emp[i].getSalary() < emp[j].getSalary()) { // Descending
-					swap(emp, i, j);
+					Utility.swap(emp, i, j);
 				}
 			}
 
 		}
 
 	}
-	
+
 	private static void selectionShort(Employee[] emp) {
 		for (int i = 0; i < emp.length - 1; ++i) {
-			int minIndex=i;
+			int minIndex = i;
 			for (int j = i + 1; j < emp.length - i - 1; ++j) {
+				Utility.counter++;
 				if (emp[minIndex].getSalary() < emp[j].getSalary()) { // Descending
-					minIndex=j;
+					minIndex = j;
 				}
 			}
-			swap(emp, i, minIndex);
+			Utility.swap(emp, i, minIndex);
 		}
 
 	}
-	
+
 	private static void insertionShort(Employee[] emp) {
 		for (int i = 1; i < emp.length - 1; ++i) {
-			Employee key=emp[i];
+			Employee key = emp[i];
 			int j = i - 1;
-			while (j>=0 && emp[j].getSalary() <  key.getSalary()) {
-				emp[j + 1]= emp[j];
+			while (j >= 0 && emp[j].getSalary() < key.getSalary()) {
+				Utility.counter++;
+				emp[j + 1] = emp[j];
 				j--;
 			}
-			emp[j + 1]= key;
+			emp[j + 1] = key;
 		}
 
 	}
-	
-	private static void swap(Employee[] emp, int x,int y) {
-		Employee temp = emp[x];
-		emp[x] = emp[y];
-		emp[y] = temp;
-	}
-	
-	
+
 	
 
 }
