@@ -29,4 +29,18 @@ public class MyLinkList {
 	public Itrator getItrator() {
 		return new Itrator(root);
 	}
+
+	public Employee getByEmpName(String name) {
+		System.out.println("Searching ****************************************** "+name);
+		
+		Itrator ite = getItrator(); 
+		Employee employee=null;
+		
+		while ((employee=ite.next()) !=null) {
+			if(employee.getEmpName().contains(name)) {
+				return employee;
+			}
+		}
+		return null;
+	}
 }
