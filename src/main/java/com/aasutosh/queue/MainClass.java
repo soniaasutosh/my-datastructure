@@ -1,4 +1,4 @@
-package com.aasutosh.stack;
+package com.aasutosh.queue;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,12 +10,13 @@ import com.aasutosh.util.Utility;
 public class MainClass {
 
 	public static void main(String[] args) {
-		System.out.println("******************  Stack  ********************");
+		System.out.println("******************  Queue  ********************");
+		
 		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\100 Records.csv";
 		
 		long startTime = System.currentTimeMillis();
 		
-		MyStack myStack = new MyStack(10);
+		MyQueue myQueue = new MyQueue(10);
 
 		int bufferSize = 10240; // 10k
 		
@@ -37,7 +38,7 @@ public class MainClass {
 				Employee emp  = new Employee(empId, empName, salary, gender, empMotherName, dateOfJoin);
 				
 				System.out.println("adding :: "+emp);
-				myStack.push(emp);
+				myQueue.enQueue(emp);
 				index++;
 				
 				if(index == 10) break;
@@ -48,25 +49,25 @@ public class MainClass {
 		}
 		
 		System.out.println("Loaded file in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
-		System.out.println("Total Employees:  " + myStack.getSize());
+		System.out.println("Total Employees:  " + myQueue.getSize());
 
 		try {
 			Thread.sleep(1000);
 		} catch (InterruptedException e) {}
 		
-		print(10, myStack);
+		print(10, myQueue);
  
 		startTime = System.currentTimeMillis();
 		
 		 
 	}
 	
-	public static void print(int numberOfRecord, MyStack myStack) {
+	public static void print(int numberOfRecord, MyQueue myQueue) {
 		System.out.println("******************************************");
 		Employee employee=null;
 		int counter=0;
 		while (counter < numberOfRecord) {
-			employee= myStack.pop();
+			employee= myQueue.deQueue();
 			System.out.println(employee);
 			counter++;
 		}
