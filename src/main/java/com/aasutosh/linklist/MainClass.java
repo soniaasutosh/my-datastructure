@@ -10,7 +10,8 @@ import com.aasutosh.util.Utility;
 public class MainClass {
 
 	public static void main(String[] args) {
-		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\Hr1m.csv";
+		System.out.println("******************  LinkList  ********************");
+		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\100 Records.csv";
 		
 		long startTime = System.currentTimeMillis();
 		
@@ -55,6 +56,9 @@ public class MainClass {
 		System.out.println(myLinkList.getByEmpName("Belkis"));
 		
 		System.out.println("find in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds");
+		
+		System.out.println("******************  data at 3 position  ********************");
+		System.out.println(myLinkList.get(3));
 	}
 	
 	public static void print(int numberOfRecord, MyLinkList myLinkList) {

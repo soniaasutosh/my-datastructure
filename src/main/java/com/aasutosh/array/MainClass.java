@@ -10,6 +10,8 @@ import com.aasutosh.util.Utility;
 public class MainClass {
 
 	public static void main(String[] args) {
+		System.out.println("******************  Array  ********************");
+		
 		String fileName = "C:\\Users\\DELL\\Desktop\\Sample Data\\100 Records.csv";
 		
 		Employee[] emp = new Employee[100];
@@ -39,6 +41,9 @@ public class MainClass {
 
 		System.out.println("Total Employees:  " + emp.length);
 
+		System.out.println("******************  data at 3 position  ********************");
+		System.out.println(emp[2]);
+		
 		System.out.println();
 		System.out.println();
 		System.out.println("Top Ten Salary wise Employees  ");
@@ -56,6 +61,8 @@ public class MainClass {
 		System.out.println("Top Ten old joined Employees  ");
 		sortRecordByDateOfJoiningOld(emp);
 		Utility.print(10, emp);
+		
+		
 	}
 
 	private static void sortRecordByDateOfJoiningOld(Employee[] emp) {

@@ -31,16 +31,29 @@ public class MyLinkList {
 	}
 
 	public Employee getByEmpName(String name) {
-		System.out.println("Searching ****************************************** "+name);
-		
-		Itrator ite = getItrator(); 
-		Employee employee=null;
-		
-		while ((employee=ite.next()) !=null) {
-			if(employee.getEmpName().contains(name)) {
+		System.out.println("Searching ****************************************** " + name);
+
+		Itrator ite = getItrator();
+		Employee employee = null;
+
+		while ((employee = ite.next()) != null) {
+			if (employee.getEmpName().contains(name)) {
 				return employee;
 			}
 		}
 		return null;
+	}
+
+	public Employee get(int index) {
+
+		Itrator ite = getItrator();
+
+		Employee employee = null;
+		int counter = 0;
+		while (counter < index) {
+			employee = ite.next();
+			counter++;
+		}
+		return employee;
 	}
 }
