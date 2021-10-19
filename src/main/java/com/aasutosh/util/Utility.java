@@ -1,4 +1,4 @@
-package com.aasutosh.array;
+package com.aasutosh.util;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,6 +6,10 @@ import java.time.format.DateTimeFormatter;
 import com.aasutosh.model.Employee;
 
 public class Utility {
+	
+	public static int counter = 0;
+	
+	
 	public static void print(int numberOfRecord, Employee[] emp) {
 		System.out.println("******************************************");
 		for (int i = 0; i < numberOfRecord; i++) {
@@ -44,5 +48,11 @@ public class Utility {
 			throw e;
 		}
 		
+	}
+	
+	public static void swap(Employee[] emp, int x, int y) {
+		Employee temp = emp[x];
+		emp[x] = emp[y];
+		emp[y] = temp;
 	}
 }
